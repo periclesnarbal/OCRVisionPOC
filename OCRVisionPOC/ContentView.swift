@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var mainTitle = ""
+    let imageURL = "https://cdn.gymaholic.co/motivation/images/7226-this-decision-will-get-you-one-step-closer-or-one.jpg"
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text(mainTitle)
         }
         .padding()
+        .onAppear(){
+            OCRVisionManager.extractTextFromImageBy(url: imageURL) { title in
+                mainTitle = title
+            }
+        }
     }
 }
 
